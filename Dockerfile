@@ -37,7 +37,7 @@ RUN apt-get update
 #
 RUN installUtility install --acceptLicense scalingMember-1.0 clusterMember-1.0 collectiveMember-1.0
 
-ADD server.xml /opt/ibm/wlp/usr/servers/defaultServer/
+ADD src/main/wlp/server.xml /opt/ibm/wlp/usr/servers/defaultServer/
 
 #
 # Insert your application file name. This statement copies the application

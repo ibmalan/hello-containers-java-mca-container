@@ -1,27 +1,50 @@
-#  Copyright 2014 IBM
+# 
+# Dockerfile to create a Liberty Network Deployment image
 #
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
+# This Dockerfile assumes:
+# - The collective enabling scripts (joinMember, removeMember) will be placed in
+#   /opt/ibm/docker in the Docker container
+# - WebSphere Liberty will be installed at /opt/ibm/wlp
+# - The WebSphere Liberty server will be "defaultServer"
+#   (for example, /opt/ibm/wlp/usr/servers/defaultServer)
+# - The Docker container runs using --net=host so that no ports are explicitly
+#   exported in this file
 
-FROM node
-MAINTAINER Robbie Minshall "rjminsha@us.ibm.com"
+FROM websphere-liberty:beta
+MAINTAINER Alan "kaihongd@cn.ibm.com"
+#
+# Auto-start the Liberty server with the container
+#
+ENTRYPOINT ["/opt/ibm/wlp/bin/server", "run", "defaultServer"]
+#
+#
 
-# Install the application
-ADD package.json /app/package.json 
-RUN cd /app && npm install  
-ADD app.js /app/app.js
+#
+# Add collective enabling scripts
+#
+#ADD joinMember /opt/ibm/docker/
+#RUN chmod +x /opt/ibm/docker/joinMember
+#ADD removeMember /opt/ibm/docker/
+#RUN chmod +x /opt/ibm/docker/removeMember
+
+#
+# Update the operating system 
+#
+RUN apt-get update
+
+#
+# Add the additional required features
+#
+RUN installUtility install --acceptLicense scalingMember-1.0 clusterMember-1.0
+collectiveMember-1.0
+
+ADD server.xml /opt/ibm/wlp/usr/servers/defaultServer/
+
+#
+# Insert your application file name. This statement copies the application
+# onto the Docker image.
+# 
+ADD target/JavaHelloWorldApp.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
+
 ENV WEB_PORT 80
 EXPOSE  80
-
-# Define command to run the application when the container starts
-CMD ["node", "/app/app.js"] 
-

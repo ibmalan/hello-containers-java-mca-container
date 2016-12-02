@@ -27,7 +27,7 @@ public class SimpleServlet extends HttpServlet {
 
     private static final String clientId = "c7e4ff93-39db-45ec-a586-ae7c36bd307b";
     private static final String clientSecret = "ZDIwMDY4NGMtOWMxNS00ZDA4LTk4OTYtZTU1ZmU1NmYxNjg5";
-    private static final String callbackUri = "http://java-mca.mybluemix.net/oauth/callback";
+    private static final String callbackUri = "http://hello-containers-java-mca-container.mybluemix.net/oauth/callback";
     private static final String authzEndpoint = "https://mobileclientaccess.ng.bluemix.net/oauth/v2/authorization";
     private static final String tokenEndpoint = "https://mobileclientaccess.ng.bluemix.net/oauth/v2/token";
     

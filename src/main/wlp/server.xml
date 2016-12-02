@@ -1,15 +1,21 @@
-<server>
+<server description="new server">
+    <basicRegistry id="basic" realm="customRealm">
+    	<user name="user" password="password"/>
+    </basicRegistry>
 
+    <!-- Enable features -->
     <featureManager>
         <feature>servlet-3.1</feature>
-    </featureManager>
+        <feature>ssl-1.0</feature>
+    	<feature>appSecurity-2.0</feature>
+    	<feature>jsp-2.3</feature>
+	</featureManager>
 
-    <httpEndpoint id="defaultHttpEndpoint"
-                  host="*"
-                  httpPort="80">
-        <tcpOptions soReuseAddr="true"/>
-    </httpEndpoint>
-
-    <application name="JavaHelloWorldApp" context-root="/JavaHelloWorldApp" location="${appLocation}" type="war"/>
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint host="*"  httpPort="80" httpsPort="9443" id="defaultHttpEndpoint"/>
+    <webApplication contextRoot="/" id="JavaHelloWorldApp" location="/opt/ibm/wlp/usr/servers/defaultServer/dropins/JavaHelloWorldApp.war" name="JavaHelloWorldApp" type="war"/>
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+    <applicationMonitor updateTrigger="mbean"/>
 
 </server>

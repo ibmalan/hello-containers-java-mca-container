@@ -35,8 +35,7 @@ RUN apt-get update
 #
 # Add the additional required features
 #
-RUN installUtility install --acceptLicense scalingMember-1.0 clusterMember-1.0
-collectiveMember-1.0
+RUN installUtility install --acceptLicense scalingMember-1.0 clusterMember-1.0 collectiveMember-1.0
 
 ADD server.xml /opt/ibm/wlp/usr/servers/defaultServer/
 

@@ -45,5 +45,5 @@ ADD src/main/wlp/server.xml /opt/ibm/wlp/usr/servers/defaultServer/
 # 
 ADD target/JavaHelloWorldApp.war /opt/ibm/wlp/usr/servers/defaultServer/dropins/
 
-ENV WEB_PORT 80
-EXPOSE  80
+ENV WEB_PORT 1234
+EXPOSE  1234

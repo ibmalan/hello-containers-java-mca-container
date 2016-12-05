@@ -25,9 +25,9 @@ public class SimpleServlet extends HttpServlet {
     private static final Logger logger = Logger.getLogger(SimpleServlet.class.getName());
     private static final OkHttpClient client = new OkHttpClient();
 
-    private static final String clientId = "c7e4ff93-39db-45ec-a586-ae7c36bd307b";
-    private static final String clientSecret = "ZDIwMDY4NGMtOWMxNS00ZDA4LTk4OTYtZTU1ZmU1NmYxNjg5";
-    private static final String callbackUri = "http://hello-containers-java-mca-container.mybluemix.net:1234/oauth/callback";
+    private static final String clientId = "ced326ac-8759-4d04-99fe-9e0f7ab69c48";
+    private static final String clientSecret = "OTRiZTNlMjktYzg5Yy00OTRkLThhNjYtMzliZTU4YTU5ZDQx";
+    private static final String callbackUri = "http://hello-containers-java-mca-container.mybluemix.net/oauth/callback";
     private static final String authzEndpoint = "https://mobileclientaccess.ng.bluemix.net/oauth/v2/authorization";
     private static final String tokenEndpoint = "https://mobileclientaccess.ng.bluemix.net/oauth/v2/token";
     
